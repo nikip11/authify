@@ -9,11 +9,14 @@ from app.auth.main import get_password_hash, verify_password, authenticate_user,
 from app.database import get_db
 from uuid import uuid4
 import os
-# models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 
 # Endpoints
+@router.get("/ping")
+def read_root():
+    return {"message": "pong! :)"}
+
 @router.post("/register", response_model=Token)
 def register(user: UserCreate, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == user.email).first()
