@@ -1,0 +1,24 @@
+name: Deploy on Local Cloud
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Shut Down Existing Containers
+        run: docker-compose down
+
+      - name: Build and Start Containers
+        run: docker-compose up -d --build
+
+      - name: Show Status of Containers
+        run: docker-compose ps
