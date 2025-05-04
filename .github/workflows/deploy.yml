@@ -18,6 +18,9 @@ jobs:
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
 
     steps:
+      - name: Fix workspace permissions
+        run: sudo chown -R $(whoami):$(whoami) $GITHUB_WORKSPACE
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
