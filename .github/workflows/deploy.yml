@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Fix workspace permissions
-        run: sudo chown -R $(whoami):$(whoami) $GITHUB_WORKSPACE
+        run: chown -R $(whoami):$(whoami) $GITHUB_WORKSPACE
 
       - name: Checkout Repository
         uses: actions/checkout@v4
