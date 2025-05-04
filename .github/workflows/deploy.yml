@@ -16,7 +16,6 @@ jobs:
       POSTGRES_USER: ${{ vars.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASS }}
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-      PYTHONDONTWRITEBYTECODE: 1
 
     steps:
       - name: Checkout Repository

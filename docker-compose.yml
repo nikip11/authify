@@ -3,8 +3,10 @@ services:
     build: .
     depends_on:
       - db
+    user: "${APP_UID}:${APP_GID}"
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      - PYTHONDONTWRITEBYTECODE=1
+      - DATABASE_URL=${DATABASE_URL}
     ports:
       - "8000:8000"
     volumes:
