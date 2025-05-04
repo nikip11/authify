@@ -22,4 +22,3 @@ services:
       - "5432:5432"
 volumes:
   postgres_data:
-user: "${UID}:${GID}"
