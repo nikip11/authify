@@ -9,6 +9,13 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    env:
+      ENVIRONMENT: ${{ vars.ENVIRONMENT }}
+      COMPOSE_PROJECT_NAME: myapp
+      DATABASE_URL: postgres://${{ vars.POSTGRES_USER }}:${{ vars.POSTGRES_PASS }}@db:5432/${{ vars.POSTGRES_DB }}
+      POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASS }}
+      POSTGRES_DB: ${{ vars.POSTGRES_DB }}
 
     steps:
       - name: Checkout Repository
