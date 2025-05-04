@@ -8,8 +8,6 @@ services:
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - DATABASE_URL=${DATABASE_URL}
-    ports:
-      - "8000:8000"
     volumes:
       - .:/app
   db:
