@@ -4,7 +4,6 @@ services:
     build: .
     depends_on:
       - db
-    user: "${APP_UID}:${APP_GID}"
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - DATABASE_URL=${DATABASE_URL}
@@ -13,7 +12,6 @@ services:
   db:
     container_name: auth-service-db
     image: postgres:15
-    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
