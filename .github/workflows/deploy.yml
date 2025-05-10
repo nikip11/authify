@@ -20,6 +20,8 @@ jobs:
       VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}
 
     steps:
+      - name: Debug Environment Variables
+        run: env
 
       - name: Checkout Repository
         uses: actions/checkout@v4
