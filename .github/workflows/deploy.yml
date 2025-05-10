@@ -17,7 +17,7 @@ jobs:
       POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASS }}
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
       VIRTUAL_HOST: ${{VIRTUAL_HOST}}
-      VIRTUAL_POST: ${{VIRTUAL_POST}}
+      VIRTUAL_PORT: ${{VIRTUAL_PORT}}
 
     steps:
 
