@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    environment: production
     env:
       ENVIRONMENT: ${{ vars.ENVIRONMENT }}
       COMPOSE_PROJECT_NAME: myapp
