@@ -24,6 +24,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Info del entorno
+        run: |
+          whoami
+          id
+          groups
+
       - name: Shut Down Existing Containers
         run: docker-compose down
 
