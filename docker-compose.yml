@@ -4,16 +4,16 @@ services:
     build: .
     depends_on:
       - db
-    user: "${APP_UID}:${APP_GID}"
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - DATABASE_URL=${DATABASE_URL}
     volumes:
       - .:/app
+    networks:
+      - proxy
   db:
     container_name: auth-service-db
     image: postgres:15
-    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -24,3 +24,7 @@ services:
       - "5432:5432"
 volumes:
   postgres_data:
+
+networks:
+  proxy:
+    external: true

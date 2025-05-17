@@ -17,17 +17,18 @@ jobs:
       POSTGRES_USER: ${{ vars.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASS }}
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+      VIRTUAL_HOST: ${{ vars.VIRTUAL_HOST }}
+      VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Shut Down Existing Containers
-        run: docker-compose down
+        run: docker compose down
 
       - name: Build and Start Containers
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
 
       - name: Show Status of Containers
-        run: docker-compose ps
+        run: docker compose ps
