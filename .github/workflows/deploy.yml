@@ -23,7 +23,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: check env vars
+      - name: Check env vars 1
         run: |
           echo "ENVIRONMENT: ${{ vars.ENVIRONMENT }}"
           echo "DATABASE_URL: ${{ vars.DATABASE_URL }}"
