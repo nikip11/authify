@@ -30,8 +30,6 @@ jobs:
           echo "DB hostname connectivity test:"
           getent hosts db || echo "DB host not found in DNS"
 
-      # Ya no es necesario crear una red interna
-
       - name: Shut Down Existing Containers
         run: docker compose down
 
