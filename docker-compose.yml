@@ -7,11 +7,14 @@ services:
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - DATABASE_URL=${DATABASE_URL}
+      - SECRET_KEY=${SECRET_KEY:-secretkey123456789}
     volumes:
       - .:/app
     networks:
       - proxy
+      - internal
   db:
+    container_name: authify-db
     image: postgres:15
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -21,9 +24,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - internal
 volumes:
   postgres_data:
 
 networks:
   proxy:
     external: true
+  internal:
+    name: authify-internal

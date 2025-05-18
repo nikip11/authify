@@ -18,10 +18,20 @@ jobs:
       VIRTUAL_HOST: ${{ vars.VIRTUAL_HOST }}
       VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}
       DATABASE_URL: ${{ vars.DATABASE_URL }}
+      SECRET_KEY: ${{ vars.SECRET_KEY || 'defaultsecretkey1234567890' }}
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Debug Environment Variables
+        run: |
+          echo "DATABASE_URL structure: $(echo $DATABASE_URL | sed 's/:.*/:****@/')" 
+          echo "DB hostname connectivity test:"
+          getent hosts db || echo "DB host not found in DNS"
+
+      - name: Create Docker Network
+        run: docker network create authify-internal || echo "Network already exists"
 
       - name: Shut Down Existing Containers
         run: docker compose down
@@ -29,5 +39,11 @@ jobs:
       - name: Build and Start Containers
         run: docker compose up -d --build
 
-      - name: Show Status of Containers
+      - name: Wait for containers to be ready
+        run: sleep 10
+
+      - name: Check if containers are running
         run: docker compose ps
+
+      - name: Check container logs
+        run: docker compose logs
