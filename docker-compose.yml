@@ -12,7 +12,6 @@ services:
       - .:/app
     networks:
       - proxy
-      - internal
   db:
     container_name: authify-db
     image: postgres:15
@@ -25,12 +24,10 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - internal
+      - proxy
 volumes:
   postgres_data:
 
 networks:
   proxy:
     external: true
-  internal:
-    name: authify-internal

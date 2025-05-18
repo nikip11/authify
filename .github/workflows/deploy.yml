@@ -17,7 +17,7 @@ jobs:
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
       VIRTUAL_HOST: ${{ vars.VIRTUAL_HOST }}
       VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}
-      DATABASE_URL: ${{ vars.DATABASE_URL }}
+      DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ vars.POSTGRES_PASS }}@db:5432/${{ vars.POSTGRES_DB }}
       SECRET_KEY: ${{ vars.SECRET_KEY || 'defaultsecretkey1234567890' }}
 
     steps:
@@ -30,8 +30,7 @@ jobs:
           echo "DB hostname connectivity test:"
           getent hosts db || echo "DB host not found in DNS"
 
-      - name: Create Docker Network
-        run: docker network create authify-internal || echo "Network already exists"
+      # Ya no es necesario crear una red interna
 
       - name: Shut Down Existing Containers
         run: docker compose down
