@@ -10,6 +10,7 @@ services:
       - SECRET_KEY=${SECRET_KEY:-secretkey123456789}
       - VIRTUAL_HOST=${VIRTUAL_HOST}
       - VIRTUAL_PORT=${VIRTUAL_PORT}
+      - FRONTEND_URLS=${FRONTEND_URLS}
     volumes:
       - .:/app
     networks:
@@ -25,8 +26,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - proxy
 volumes:
   postgres_data:
 

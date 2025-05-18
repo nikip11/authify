@@ -19,6 +19,7 @@ jobs:
       VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}
       DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ vars.POSTGRES_PASS }}@db:5432/${{ vars.POSTGRES_DB }}
       SECRET_KEY: ${{ vars.SECRET_KEY || 'defaultsecretkey1234567890' }}
+      FRONTEND_URLS: ${{ vars.FRONTEND_URLS || 'http://localhost:3000' }}
 
     steps:
       - name: Checkout Repository
