@@ -17,20 +17,11 @@ jobs:
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
       VIRTUAL_HOST: ${{ vars.VIRTUAL_HOST }}
       VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}
-      DATABASE_URL: "postgres://${{ vars.POSTGRES_USER }}:${{ vars.POSTGRES_PASS }}@db:5432/${{ vars.POSTGRES_DB }}"
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Check env vars quoates
-        run: |
-          echo "DATABASE_URL: ${{ vars.DATABASE_URL }}"
-          echo "POSTGRES_USER: ${{ vars.POSTGRES_USER }}"
-          echo "POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASS }}"
-          echo "POSTGRES_DB: ${{ vars.POSTGRES_DB }}"
-          echo "VIRTUAL_HOST: ${{ vars.VIRTUAL_HOST }}"
-          echo "VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}"
 
       - name: Shut Down Existing Containers
         run: docker compose down
