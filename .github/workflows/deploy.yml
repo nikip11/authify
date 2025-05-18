@@ -9,15 +9,15 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    environment: Production
+    environment: production
     env:
       COMPOSE_PROJECT_NAME: authify
-      DATABASE_URL: "postgres://${{ vars.POSTGRES_USER }}:${{ vars.POSTGRES_PASS }}@db:5432/${{ vars.POSTGRES_DB }}"
-      POSTGRES_USER: ${{ vars.POSTGRES_USER }}
-      POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASS }}
-      POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-      VIRTUAL_HOST: ${{ vars.VIRTUAL_HOST }}
-      VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}
+      POSTGRES_USER: ${{ env.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ env.POSTGRES_PASS }}
+      POSTGRES_DB: ${{ env.POSTGRES_DB }}
+      VIRTUAL_HOST: ${{ env.VIRTUAL_HOST }}
+      VIRTUAL_PORT: ${{ env.VIRTUAL_PORT }}
+      DATABASE_URL: "postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASS }}@db:5432/${{ env.POSTGRES_DB }}"
 
     steps:
       - name: Checkout Repository
@@ -25,13 +25,12 @@ jobs:
 
       - name: Check env vars 1
         run: |
-          echo "ENVIRONMENT: ${{ vars.ENVIRONMENT }}"
-          echo "DATABASE_URL: ${{ vars.DATABASE_URL }}"
-          echo "POSTGRES_USER: ${{ vars.POSTGRES_USER }}"
-          echo "POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASS }}"
-          echo "POSTGRES_DB: ${{ vars.POSTGRES_DB }}"
-          echo "VIRTUAL_HOST: ${{ vars.VIRTUAL_HOST }}"
-          echo "VIRTUAL_PORT: ${{ vars.VIRTUAL_PORT }}"
+          echo "DATABASE_URL: ${{ env.DATABASE_URL }}"
+          echo "POSTGRES_USER: ${{ env.POSTGRES_USER }}"
+          echo "POSTGRES_PASSWORD: ${{ env.POSTGRES_PASS }}"
+          echo "POSTGRES_DB: ${{ env.POSTGRES_DB }}"
+          echo "VIRTUAL_HOST: ${{ env.VIRTUAL_HOST }}"
+          echo "VIRTUAL_PORT: ${{ env.VIRTUAL_PORT }}"
 
       - name: Shut Down Existing Containers
         run: docker compose down
